@@ -5,16 +5,13 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
-// TODO CheckStyle: Wrong lexicographical order for 'java.util.HashMap' import (remove this comment once resolved)
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * This class provides the service of converting country codes to their names.
  */
 public class CountryCodeConverter {
 
-    // TODO Task: pick appropriate instance variable(s) to store the data necessary for this class
+    private final List<String> countries;
 
     /**
      * Default constructor which will load the country codes from "country-codes.txt"
@@ -35,7 +32,7 @@ public class CountryCodeConverter {
             List<String> lines = Files.readAllLines(Paths.get(getClass()
                     .getClassLoader().getResource(filename).toURI()));
 
-            // TODO Task: use lines to populate the instance variable(s)
+            countries = lines;
 
         }
         catch (IOException | URISyntaxException ex) {
@@ -49,9 +46,14 @@ public class CountryCodeConverter {
      * @param code the 3-letter code of the country
      * @return the name of the country corresponding to the code
      */
-    public String fromCountryCode(String code) {
-        // TODO Task: update this code to use an instance variable to return the correct value
-        return code;
+    public Object fromCountryCode(String code) {
+        for (String c : countries.subList(1, countries.size())) {
+            String[] cSplit = c.split("\t");
+            if (cSplit[2].toLowerCase().equals(code)) {
+                return cSplit[0];
+            }
+        }
+        return "Country not found";
     }
 
     /**
@@ -60,8 +62,13 @@ public class CountryCodeConverter {
      * @return the 3-letter code of the country
      */
     public String fromCountry(String country) {
-        // TODO Task: update this code to use an instance variable to return the correct value
-        return country;
+        for (String c : countries.subList(1, countries.size())) {
+            String[] cSplit = c.split("\t");
+            if (cSplit[0].equals(country)) {
+                return cSplit[2];
+            }
+        }
+        return "Country not found";
     }
 
     /**
@@ -69,7 +76,6 @@ public class CountryCodeConverter {
      * @return how many countries are included in this code converter.
      */
     public int getNumCountries() {
-        // TODO Task: update this code to use an instance variable to return the correct value
-        return 0;
+        return countries.size() - 1;
     }
 }
