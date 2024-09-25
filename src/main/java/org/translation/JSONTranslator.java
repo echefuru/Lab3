@@ -87,6 +87,6 @@ public class JSONTranslator implements Translator {
                 }
             }
         }
-        return "Country not found";
+        return null;
     }
 }
