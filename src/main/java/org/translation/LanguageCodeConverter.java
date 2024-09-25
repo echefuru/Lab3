@@ -49,7 +49,7 @@ public class LanguageCodeConverter {
     public String fromLanguageCode(String code) {
         for (String c : languages.subList(1, languages.size())) {
             String[] cSplit = c.split("\t");
-            if (cSplit[1].toLowerCase().equals(code)) {
+            if (cSplit[1].equals(code)) {
                 return cSplit[0];
             }
         }
