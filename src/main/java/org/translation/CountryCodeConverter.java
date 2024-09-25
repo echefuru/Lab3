@@ -46,7 +46,7 @@ public class CountryCodeConverter {
      * @param code the 3-letter code of the country
      * @return the name of the country corresponding to the code
      */
-    public Object fromCountryCode(String code) {
+    public String fromCountryCode(String code) {
         for (String c : countries.subList(1, countries.size())) {
             String[] cSplit = c.split("\t");
             if (cSplit[2].toLowerCase().equals(code)) {
