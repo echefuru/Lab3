@@ -52,12 +52,11 @@ public class JSONTranslator implements Translator {
         for (int i = 0; i < jsonArray1.length(); i++) {
             if (jsonArray1.getJSONObject(i).getString(ALPHA3).equals(country)) {
                 Iterator<String> keys = jsonArray1.getJSONObject(i).keys();
-                keys.next();
-                keys.next();
-                keys.next();
                 while (keys.hasNext()) {
                     String key = keys.next();
-                    result.add(key);
+                    if (!key.equals(ALPHA3) && !"alpha2".equals(key) && !"id".equals(key)) {
+                        result.add(key);
+                    }
                 }
                 break;
             }
