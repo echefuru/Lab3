@@ -65,7 +65,7 @@ public class CountryCodeConverter {
         for (String c : countries.subList(1, countries.size())) {
             String[] cSplit = c.split("\t");
             if (cSplit[0].equals(country)) {
-                return cSplit[2];
+                return cSplit[2].toLowerCase();
             }
         }
         return "Country not found";
